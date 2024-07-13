@@ -52,9 +52,8 @@ const AddReport = () => {
             <TextInput label = "diagnosis" {...form.getInputProps('diagnosis')} ></TextInput>
             <Textarea size='xl'  label = "Details" withAsterisk {...form.getInputProps('details')}  />
           </Group>
-
           <Group>
-            <input placeholder='image' type='file' onChange={handleImageChange} id='image'></input>
+            <TextInput label="photo's url"{...form.getInputProps('image')} ></TextInput>
           </Group>
 
           <Group style={{justifyContent : 'space-between' , display : 'flex' , alignItems : 'center' , textAlign : 'center' }} >

@@ -53,7 +53,16 @@ const ReportDetail = () => {
                   TC Number: <Text component="span" weight={700} color="dark">{report.tcNumber}</Text>
               </Text>
               {report.image && (
-                        <Image src={report.image} alt='report image' style={{ marginTop: '20px', maxHeight: '400px', objectFit: 'contain' }} />
+                        <Image
+                            src={report.image}
+                            alt='report image'
+                            style={{
+                                marginTop: '20px',
+                                maxHeight: '400px',
+                                objectFit: 'contain',
+                                width: '100%'
+                            }}
+                        />
                     )}
               
               <Badge color="green" variant="filled" size="md">{new Date(report.date).toLocaleDateString()}</Badge>

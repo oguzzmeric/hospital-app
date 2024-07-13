@@ -11,12 +11,12 @@ app.use(cors());
 let reports = [
     {
         id: 1,
-        patientName: 'John Doe',
+        patientName: 'oguz',
         laborantName: 'Alice Smith',
         diagnosis: 'Lorem ipsum dolor sit amet',
         details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         date: '2024-06-15',
-        image: 'https://example.com/image1.jpg',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg',
         tcNumber: '12345678901', // Örnek bir TCK numarası
     },
     {
@@ -26,7 +26,7 @@ let reports = [
         diagnosis: 'Lorem ipsum dolor sit amet',
         details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         date: '2024-06-14',
-        image: 'https://example.com/image2.jpg',
+        image: 'https://www.ucarecdn.com/62812244-5f34-4449-8500-086acc61ce9e/-/resize/700x/',
         tcNumber: '12345678901', // Örnek bir TCK numarası
     },
 ];

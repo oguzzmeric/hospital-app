@@ -30,6 +30,11 @@ const AddReport = () => {
         navigate('/');
     };
 
+    const handleImageChange  = (event) => {
+      form.setFieldValue('image' , event.currentTarget.files[0]);
+
+    }
+
     return( 
  <div style={{minHeight : '100vh', display : 'grid' , backgroundColor : '#01393A '  }} >  
   <div style={{ padding: '1%' , alignItems : 'center', marginLeft : '30%',marginRight : '30%' ,marginBottom:'10%' , marginTop : '10%' , textAlign : 'center', alignContent : 'center' }} >
@@ -47,7 +52,11 @@ const AddReport = () => {
             <TextInput label = "diagnosis" {...form.getInputProps('diagnosis')} ></TextInput>
             <Textarea size='xl'  label = "Details" withAsterisk {...form.getInputProps('details')}  />
           </Group>
-          
+
+          <Group>
+            <input placeholder='image' type='file' onChange={handleImageChange} id='image'></input>
+          </Group>
+
           <Group style={{justifyContent : 'space-between' , display : 'flex' , alignItems : 'center' , textAlign : 'center' }} >
             <TextInput label = "enter a date" placeholder='YYYY-MM-DD' type='date'{...form.getInputProps('date')} ></TextInput>
             <Button  style={{marginTop : '10%'}} type='submit'>add the report</Button>

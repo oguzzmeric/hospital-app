@@ -16,7 +16,7 @@ let reports = [
         diagnosis: 'Lorem ipsum dolor sit amet',
         details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         date: '2024-06-15',
-        image: 'https://example.com/image1.jpg',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg',
         tcNumber: '12345678901', // Örnek bir TCK numarası
     },
     {

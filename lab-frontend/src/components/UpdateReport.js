@@ -64,6 +64,9 @@ const UpdateReport = () => {
               <Textarea label="Details" {...form.getInputProps('details')} />
 
             </Group>
+            <Group>
+              <TextInput label='photos url ' {...form.getInputProps('image')}  ></TextInput>
+            </Group>
             <Group style={{justifyContent : 'space-between' , display : 'flex' , alignItems : 'center' , textAlign : 'center' }} >
               <TextInput label = "enter a date" placeholder='YYYY-MM-DD' type='date'{...form.getInputProps('date')} ></TextInput>
               <Button  style={{marginTop : '10%'}} type='submit'>update the report</Button>

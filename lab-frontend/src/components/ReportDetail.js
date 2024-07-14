@@ -58,7 +58,7 @@ const ReportDetail = () => {
                             alt='report image'
                             style={{
                                 marginTop: '20px',
-                                maxHeight: '400px',
+                                maxHeight: '300px',
                                 objectFit: 'contain',
                                 width: '100%'
                             }}

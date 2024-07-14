@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput, Textarea, Button , Loader, Card, Group} from '@mantine/core';
+import { NumberInput,TextInput, Textarea, Button , Loader, Card, Group , Select} from '@mantine/core';
 import { useUpdateReportMutation , useGetReportByIdQuery } from '../services/report';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { DatePicker } from '@mantine/dates';
@@ -57,18 +57,18 @@ const UpdateReport = () => {
           <form onSubmit={form.onSubmit(handleSubmit)} >
             <Group>
 
-              <TextInput label="patient name" {...form.getInputProps('patientName')} ></TextInput>
-              <TextInput label="TCK NUMBER" {...form.getInputProps('tcNumber')} ></TextInput>
-              <TextInput label = "laborant name" {...form.getInputProps('laborantName')} ></TextInput>
-              <TextInput label = "diagnosis" {...form.getInputProps('diagnosis')} ></TextInput>
-              <Textarea label="Details" {...form.getInputProps('details')} />
+              <TextInput required type='text'  label="patient name" {...form.getInputProps('patientName')} ></TextInput>
+              <NumberInput label='tck number' hideControls required   {...form.getInputProps('tcNumber')} ></NumberInput>
+              <TextInput required type='text' label='laborant name' {...form.getInputProps('laborantName')} ></TextInput>
+              <TextInput required type='text' label = "diagnosis" {...form.getInputProps('diagnosis')} ></TextInput>
+              <Textarea type='text' label="Details" {...form.getInputProps('details')} />
 
             </Group>
             <Group>
               <TextInput label='photos url ' {...form.getInputProps('image')}  ></TextInput>
             </Group>
             <Group style={{justifyContent : 'space-between' , display : 'flex' , alignItems : 'center' , textAlign : 'center' }} >
-              <TextInput label = "enter a date" placeholder='YYYY-MM-DD' type='date'{...form.getInputProps('date')} ></TextInput>
+              <TextInput required label = "enter a date" placeholder='YYYY-MM-DD' type='date'{...form.getInputProps('date')} ></TextInput>
               <Button  style={{marginTop : '10%'}} type='submit'>update the report</Button>
             </Group>
           </form>  

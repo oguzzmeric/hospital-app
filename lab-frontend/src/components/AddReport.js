@@ -1,73 +1,86 @@
 import React from 'react';
 import { useForm } from '@mantine/form';
-import {Card , NumberInput , TextInput, Textarea, Button , Group, Radio} from '@mantine/core';
+import { Card, NumberInput, TextInput, Textarea, Button, Group, Radio } from '@mantine/core';
 import { useAddReportMutation } from '../services/report';
-import { Form, useNavigate } from 'react-router-dom';
-import { DatePicker} from '@mantine/dates';
-import { DateInput } from '@mantine/dates';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { DateTimePicker } from '@mantine/dates';
 
 const AddReport = () => {
-    const [addReport] = useAddReportMutation();
-    const navigate = useNavigate();
-    
-    const form = useForm({
-        initialValues: {
-          patientName: '',
-          laborantName: '',
-          diagnosis: '',
-          details: '',
-          date: '',
-          image: null,
-          tcNumber: '', 
-        },
-      });
+  const [addReport] = useAddReportMutation();
+  const navigate = useNavigate();
 
-    const handleSubmit = async (values) => {
-        await addReport(values);
-        navigate('/');
-    };
+  const currentDate = new Date().toISOString().slice(0, 10);
 
-    const handleImageChange  = (event) => {
-      form.setFieldValue('image' , event.currentTarget.files[0]);
+  const form = useForm({
+    initialValues: {
+      patientName: '',
+      laborantName: '',
+      diagnosis: '',
+      details: '',
+      date: currentDate,
+      image: null,
+      tcNumber: '', 
+    },
+  });
 
-    }
+  const handleSubmit = async (values) => {
+    await addReport(values);
+    navigate('/');
+  };
 
-    return( 
- <div style={{minHeight : '100vh', display : 'grid' , backgroundColor : '#01393A '  }} >  
-  <div style={{ padding: '1%' , alignItems : 'center', marginLeft : '30%',marginRight : '30%' ,marginBottom:'10%' , marginTop : '10%' , textAlign : 'center', alignContent : 'center' }} >
-    <Card style={{ alignItems : 'center' , textAlign : 'center'   , padding : '3.5%', backgroundColor :'#0B6F70' , borderRadius : '6%' }} >
-      <Group style={{display:'flex'}} >
-        <Button component={Link} to='/' variant='filled'> <RiArrowGoBackFill size={25}  style={{ boxShadow : 'revert-layer' ,  borderRadius : '20%' ,color:'darkslateblue' , backgroundColor : 'white'}} /> </Button>
-      </Group>
-      <Group>
+  const handleImageChange = (event) => {
+    form.setFieldValue('image', event.currentTarget.files[0]);
+  };
 
-        <form onSubmit={form.onSubmit(handleSubmit)} >
-          <Group>
-            
-            <TextInput label="patient name" required {...form.getInputProps('patientName')} ></TextInput>
-            <NumberInput label='tck number' hideControls required   {...form.getInputProps('tcNumber')} ></NumberInput>
-            <TextInput label = "laborant name" required {...form.getInputProps('laborantName')} ></TextInput>
-            <TextInput label = "diagnosis" required {...form.getInputProps('diagnosis')} ></TextInput>
-            <Textarea size='xl'  label = "Details" withAsterisk {...form.getInputProps('details')}  />
+  const laborantOptions = [
+    { label: 'mehmet ışıklar', value: 'mehmet ışıklar' },
+    { label: 'prof.dr Semih akyol', value: 'prof.dr Semih akyol' },
+    { label: 'dr umutcan fırat', value: 'dr umutcan fırat' },
+    { label: 'dr.ali aksakal', value: 'dr.ali aksakal' },
+  ];
+
+  return (
+    <div style={{ minHeight: '100vh', display: 'grid', backgroundColor: '#01393A' }}>
+      <div style={{ padding: '1%', alignItems: 'center', marginLeft: '30%', marginRight: '30%', marginBottom: '10%', marginTop: '10%', textAlign: 'center', alignContent: 'center' }}>
+        <Card style={{ alignItems: 'center', textAlign: 'center', padding: '3.5%', backgroundColor: '#0B6F70', borderRadius: '6%' }}>
+          <Group style={{ display: 'flex' }}>
+            <Button component={Link} to='/' variant='filled'> <RiArrowGoBackFill size={25} style={{ boxShadow: 'revert-layer', borderRadius: '20%', color: 'darkslateblue', backgroundColor: 'white' }} /> </Button>
           </Group>
           <Group>
-            <TextInput label="photo's url"{...form.getInputProps('image')} ></TextInput>
+            <form onSubmit={form.onSubmit(handleSubmit)}>
+              <Group>
+                <TextInput label="patient name" required {...form.getInputProps('patientName')} />
+                <NumberInput label='tck number' hideControls required {...form.getInputProps('tcNumber')} />
+                <Group label="Select Laborant" direction="horizontal" style={{ marginBottom: '10px' }}>
+                  {laborantOptions.map((option) => (
+                    <Radio
+                      key={option.value}
+                      label={option.label}
+                      value={option.value}
+                      checked={form.values.laborantName === option.value}
+                      onChange={() => form.setFieldValue('laborantName', option.value)}
+                      size="sm"
+                      style={{ marginRight: '10px', width: 'auto', height: 'auto', padding: '2px', borderRadius: '50%', border: '2px solid #0B6F70', backgroundColor: '#01393A', color: '#0B6F70' }}
+                    />
+                  ))}
+                </Group>
+                <TextInput label="diagnosis" required {...form.getInputProps('diagnosis')} />
+                <Textarea size='xl' label="Details" withAsterisk {...form.getInputProps('details')} />
+              </Group>
+              <Group>
+                <TextInput label="photo's url" {...form.getInputProps('image')} />
+              </Group>
+              <Group style={{ justifyContent: 'space-between', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+                <TextInput required label="enter a date" placeholder='YYYY-MM-DD' type='date' {...form.getInputProps('date')} />
+                <Button style={{ marginTop: '10%' }} type='submit'>add the report</Button>
+              </Group>
+            </form>
           </Group>
-
-          <Group style={{justifyContent : 'space-between' , display : 'flex' , alignItems : 'center' , textAlign : 'center' }} >
-            <TextInput required label = "enter a date" placeholder='YYYY-MM-DD' type='date'{...form.getInputProps('date')} ></TextInput>
-            <Button  style={{marginTop : '10%'}} type='submit'>add the report</Button>
-          </Group>
-        </form>
-
-      </Group>
-    </Card>
-  </div>
- </div> 
-    );
+        </Card>
+      </div>
+    </div>
+  );
 };
 
 export default AddReport;

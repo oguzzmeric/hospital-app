@@ -25,14 +25,17 @@ const ReportList = () => {
   if (isLoading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
-  // Raporları arama terimine göre filtreleyin
+  
   const filteredReports = reports.filter((report) =>
     report.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     report.laborantName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     report.diagnosis.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    report.tcNumber.includes(searchTerm)
+    (typeof report.tcNumber === 'string' && report.tcNumber.includes(searchTerm)) ||
+    report.id.toString().includes(searchTerm)
   );
-
+  
+  const sortedReports = filteredReports.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
   return (
 
   <div style={{backgroundColor : '#01393A' , minHeight : '100vh' }} >
@@ -74,7 +77,7 @@ const ReportList = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredReports.map((report) => (
+            {sortedReports.map((report) => (
               <tr key={report.id}>
                 <td style={{ padding: '10px', borderBottom: '1px solid white' }}>{report.id}</td>
                 <td style={{ padding: '10px', borderBottom: '1px solid white' }}>{report.patientName}</td>

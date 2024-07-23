@@ -29,10 +29,6 @@ const AddReport = () => {
     navigate('/');
   };
 
-  const handleImageChange = (event) => {
-    form.setFieldValue('image', event.currentTarget.files[0]);
-  };
-
   const laborantOptions = [
     { label: 'mehmet ışıklar', value: 'mehmet ışıklar' },
     { label: 'prof.dr Semih akyol', value: 'prof.dr Semih akyol' },
@@ -52,7 +48,8 @@ const AddReport = () => {
               <Group>
                 <TextInput label="patient name" required {...form.getInputProps('patientName')} />
                 <NumberInput label='tck number' hideControls required {...form.getInputProps('tcNumber')} />
-                <Group label="Select Laborant" direction="horizontal" style={{ marginBottom: '10px' }}>
+                <h2>SELECT THE Laborant</h2>
+                <Group label="Select Laborant" direction="horizontal" style={{ marginBottom: '10px', justifyContent: 'space-between', display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                   {laborantOptions.map((option) => (
                     <Radio
                       key={option.value}
@@ -61,7 +58,7 @@ const AddReport = () => {
                       checked={form.values.laborantName === option.value}
                       onChange={() => form.setFieldValue('laborantName', option.value)}
                       size="sm"
-                      style={{ marginRight: '10px', width: 'auto', height: 'auto', padding: '2px', borderRadius: '50%', border: '2px solid #0B6F70', backgroundColor: '#01393A', color: '#0B6F70' }}
+                      style={{ marginRight: '10%', width: '1%', height: '1%', padding: '1px', borderRadius: '50%', border: '2px solid #0B6F70'  }}
                     />
                   ))}
                 </Group>
